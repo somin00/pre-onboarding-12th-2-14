@@ -20,7 +20,7 @@ export const GlobalStyles = createGlobalStyle`
     border: 3px solid black;
   }
 
-  ul{
+  ul, li{
     list-style: none;
   }
 
