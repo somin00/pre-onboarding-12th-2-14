@@ -13,7 +13,7 @@ function App() {
       <GlobalStyles />
       <Routes>
         <Route path='/' element={<IssueList />} />
-        <Route path='/detail' element={<IssueDetail />} />
+        <Route path='/detail/:issueNumber' element={<IssueDetail />} />
         <Route path='/*' element={<NotFound />} />
       </Routes>
     </BrowserRouter>
