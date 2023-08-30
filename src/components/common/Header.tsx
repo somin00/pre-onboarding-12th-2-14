@@ -8,7 +8,7 @@ export const REPO_INFO = {
 };
 
 function Header() {
-  return <HeaderWrapper>{`${REPO_INFO.organization}/ ${REPO_INFO.repository}`}</HeaderWrapper>;
+  return <HeaderWrapper>{`${REPO_INFO.organization} / ${REPO_INFO.repository}`}</HeaderWrapper>;
 }
 
 export default Header;

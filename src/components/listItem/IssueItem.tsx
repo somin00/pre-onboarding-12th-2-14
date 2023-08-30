@@ -40,6 +40,8 @@ const IssueItemWrapper = styled.li<{ $pathname: string }>`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-weight: bold;
+    font-size: ${({ $pathname }) => ($pathname !== '/' ? '1rem' : '1.1rem')};
   }
 
   .comment {
