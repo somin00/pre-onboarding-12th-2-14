@@ -1,14 +1,11 @@
 import React from 'react';
 
+import { REPO_INFO } from 'constant';
 import { styled } from 'styled-components';
 
-export const REPO_INFO = {
-  organization: 'facebook',
-  repository: 'react',
-};
-
 function Header() {
-  return <HeaderWrapper>{`${REPO_INFO.organization} / ${REPO_INFO.repository}`}</HeaderWrapper>;
+  const { organization, repository } = REPO_INFO;
+  return <HeaderWrapper>{`${organization} / ${repository}`}</HeaderWrapper>;
 }
 
 export default Header;
