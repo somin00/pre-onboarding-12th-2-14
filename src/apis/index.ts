@@ -1,6 +1,9 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://api.github.com/repos/facebook/react/issues';
+import { REPO_INFO } from 'components/common/Header';
+
+const { organization, repository } = REPO_INFO;
+const BASE_URL = `https://api.github.com/repos/${organization}/${repository}/issues`;
 
 const TOKEN = process.env.REACT_APP_GIT_TOKEN;
 
