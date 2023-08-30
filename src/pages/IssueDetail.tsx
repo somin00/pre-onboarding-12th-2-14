@@ -1,28 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-import { getIssueDetail } from 'apis';
 import { useLocation } from 'react-router';
 import { styled } from 'styled-components';
-import { IssueType } from 'types';
 
 import Layout from 'components/common/Layout';
 import Loading from 'components/common/Loading';
 import IssueItem from 'components/listItem/IssueItem';
+import useFetch from 'hooks/useFetch';
 
 import ErrorPage from './ErrorPage';
 
 function IssueDetail() {
   const location = useLocation();
   const number = location.state.number;
-
-  const [issue, setIssue] = useState<IssueType | null>(null);
-  const [isShowError, setIsShowError] = useState<boolean>(false);
-
-  useEffect(() => {
-    getIssueDetail(number)
-      .then(response => setIssue(response))
-      .catch(() => setIsShowError(true));
-  }, [number]);
+  const { selectedIssue: issue, isShowError } = useFetch({ currentNum: number });
 
   if (isShowError) {
     return <ErrorPage />;

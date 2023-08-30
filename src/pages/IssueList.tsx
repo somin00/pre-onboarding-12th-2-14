@@ -1,13 +1,12 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
 
-import { getIssues } from 'apis';
 import styled from 'styled-components';
-import { IssueType } from 'types';
 
 import Layout from 'components/common/Layout';
 import Loading from 'components/common/Loading';
 import IssueItem from 'components/listItem/IssueItem';
 import WantedAds from 'components/listItem/WantedAds';
+import useFetch from 'hooks/useFetch';
 
 import ErrorPage from './ErrorPage';
 
@@ -20,10 +19,8 @@ interface IntersectionObserverType {
 function IssueList() {
   const containerRef = useRef<HTMLUListElement | null>(null);
   const targetRef = useRef<HTMLDivElement>(null);
-  const [issueList, setIssueList] = useState<IssueType[]>([]);
   const [page, setPage] = useState<number>(1);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [isShowError, setIsShowError] = useState<boolean>(false);
+  const { issueList, loading, isShowError } = useFetch({ currentNum: page });
 
   const intersctionOptions: IntersectionObserverType = useMemo(
     () => ({
@@ -36,17 +33,6 @@ function IssueList() {
   const loadMore = () => {
     setPage(prev => prev + 1);
   };
-
-  useEffect(() => {
-    getIssues(page)
-      .then(response => {
-        setIssueList(prev => {
-          return [...prev, ...response];
-        });
-        setLoading(true);
-      })
-      .catch(() => setIsShowError(true));
-  }, [page]);
 
   useEffect(() => {
     if (!targetRef.current) return;
