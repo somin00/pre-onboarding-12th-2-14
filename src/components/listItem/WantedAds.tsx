@@ -6,7 +6,7 @@ import { styled } from 'styled-components';
 function WantedAds() {
   return (
     <AdsWrapper>
-      <Link to='https://www.wanted.co.kr/'>
+      <Link to='https://www.wanted.co.kr/' target='_blank'>
         <img src='/assets/awoptimize.png' alt='원티드 광고 이미지' />
       </Link>
     </AdsWrapper>
