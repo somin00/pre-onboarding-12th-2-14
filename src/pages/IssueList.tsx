@@ -9,6 +9,8 @@ import Loading from 'components/common/Loading';
 import IssueItem from 'components/listItem/IssueItem';
 import WantedAds from 'components/listItem/WantedAds';
 
+import ErrorPage from './ErrorPage';
+
 interface IntersectionObserverType {
   root?: Element | Document | null;
   rootMargin?: string;
@@ -21,6 +23,7 @@ function IssueList() {
   const [issueList, setIssueList] = useState<IssueType[]>([]);
   const [page, setPage] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
+  const [isShowError, setIsShowError] = useState<boolean>(false);
 
   const intersctionOptions: IntersectionObserverType = useMemo(
     () => ({
@@ -35,12 +38,14 @@ function IssueList() {
   };
 
   useEffect(() => {
-    getIssues(page).then(response => {
-      setIssueList(prev => {
-        return [...prev, ...response];
-      });
-      setLoading(true);
-    });
+    getIssues(page)
+      .then(response => {
+        setIssueList(prev => {
+          return [...prev, ...response];
+        });
+        setLoading(true);
+      })
+      .catch(() => setIsShowError(true));
   }, [page]);
 
   useEffect(() => {
@@ -58,6 +63,10 @@ function IssueList() {
 
     return () => observer && observer.disconnect();
   }, [intersctionOptions, loading]);
+
+  if (isShowError) {
+    return <ErrorPage />;
+  }
 
   return (
     <Layout>

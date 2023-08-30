@@ -9,15 +9,24 @@ import Layout from 'components/common/Layout';
 import Loading from 'components/common/Loading';
 import IssueItem from 'components/listItem/IssueItem';
 
+import ErrorPage from './ErrorPage';
+
 function IssueDetail() {
   const location = useLocation();
   const number = location.state.number;
 
   const [issue, setIssue] = useState<IssueType | null>(null);
+  const [isShowError, setIsShowError] = useState<boolean>(false);
 
   useEffect(() => {
-    getIssueDetail(number).then(response => setIssue(response));
+    getIssueDetail(number)
+      .then(response => setIssue(response))
+      .catch(() => setIsShowError(true));
   }, [number]);
+
+  if (isShowError) {
+    return <ErrorPage />;
+  }
 
   return (
     <Layout>
