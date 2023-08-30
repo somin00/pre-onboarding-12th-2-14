@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 
-function WantedAds() {
+function Advertisement() {
   return (
     <AdsWrapper>
       <Link to='https://www.wanted.co.kr/' target='_blank'>
@@ -13,7 +13,7 @@ function WantedAds() {
   );
 }
 
-export default WantedAds;
+export default Advertisement;
 
 const AdsWrapper = styled.li`
   height: 57px;

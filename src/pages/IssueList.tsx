@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 import Layout from 'components/common/Layout';
 import Loading from 'components/common/Loading';
+import Advertisement from 'components/listItem/Advertisement';
 import IssueItem from 'components/listItem/IssueItem';
-import WantedAds from 'components/listItem/WantedAds';
 import useFetch from 'hooks/useFetch';
 import useIntersect from 'hooks/useIntersect';
 
@@ -29,7 +29,7 @@ function IssueList() {
               return (
                 <React.Fragment key={`${issue.id + idx}`}>
                   <IssueItem key={issue.id} issue={issue} />
-                  <WantedAds key={idx + 1} />
+                  <Advertisement key={idx + 1} />
                 </React.Fragment>
               );
             } else {
