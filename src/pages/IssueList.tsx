@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useMemo } from 'react';
+import React, { useState } from 'react';
 
 import styled from 'styled-components';
 
@@ -7,48 +7,14 @@ import Loading from 'components/common/Loading';
 import IssueItem from 'components/listItem/IssueItem';
 import WantedAds from 'components/listItem/WantedAds';
 import useFetch from 'hooks/useFetch';
+import useIntersect from 'hooks/useIntersect';
 
 import ErrorPage from './ErrorPage';
 
-interface IntersectionObserverType {
-  root?: Element | Document | null;
-  rootMargin?: string;
-  threshold?: number | number[];
-}
-
 function IssueList() {
-  const containerRef = useRef<HTMLUListElement | null>(null);
-  const targetRef = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState<number>(1);
   const { issueList, loading, isShowError } = useFetch({ currentNum: page });
-
-  const intersctionOptions: IntersectionObserverType = useMemo(
-    () => ({
-      root: containerRef.current,
-      threshold: 1,
-    }),
-    [],
-  );
-
-  const loadMore = () => {
-    setPage(prev => prev + 1);
-  };
-
-  useEffect(() => {
-    if (!targetRef.current) return;
-    let observer: IntersectionObserver;
-    if (loading) {
-      observer = new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting) {
-          loadMore();
-        }
-      }, intersctionOptions);
-
-      if (targetRef.current) observer.observe(targetRef.current);
-    }
-
-    return () => observer && observer.disconnect();
-  }, [intersctionOptions, loading]);
+  const { targetRef } = useIntersect({ loading, setPage });
 
   if (isShowError) {
     return <ErrorPage />;
@@ -57,7 +23,7 @@ function IssueList() {
   return (
     <Layout>
       {issueList.length !== 0 ? (
-        <IssueListWrapper ref={containerRef}>
+        <IssueListWrapper>
           {issueList.map((issue, idx) => {
             if ((idx + 1) % 4 === 0) {
               return (
