@@ -27,9 +27,9 @@ function IssueList() {
           {issueList.map((issue, idx) => {
             if ((idx + 1) % 4 === 0) {
               return (
-                <React.Fragment key={`${issue.id + idx}`}>
-                  <IssueItem key={issue.id} issue={issue} />
-                  <Advertisement key={idx + 1} />
+                <React.Fragment key={`${issue.id}`}>
+                  <IssueItem issue={issue} />
+                  <Advertisement />
                 </React.Fragment>
               );
             } else {
