@@ -18,7 +18,7 @@ function useFetch({ currentNum }: FetchPropsType) {
   const fetchIssues = useCallback(async () => {
     try {
       const data = await getIssues(currentNum);
-      setLoading(true);
+      data.length < 10 ? setLoading(false) : setLoading(true);
       setIssueList(prev => {
         return [...prev, ...data];
       });
