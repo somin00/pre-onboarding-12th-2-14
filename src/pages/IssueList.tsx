@@ -25,18 +25,20 @@ function IssueList() {
       {issueList.length !== 0 ? (
         <IssueListWrapper>
           {issueList.map((issue, idx) => {
-            if ((idx + 1) % 4 === 0) {
-              return (
-                <React.Fragment key={issue.id}>
+            const isLastIssue = idx === issueList.length - 1;
+            return (
+              <li key={issue.id} ref={isLastIssue ? targetRef : null}>
+                {(idx + 1) % 4 === 0 ? (
+                  <>
+                    <IssueItem issue={issue} />
+                    <Advertisement />
+                  </>
+                ) : (
                   <IssueItem issue={issue} />
-                  <Advertisement />
-                </React.Fragment>
-              );
-            } else {
-              return <IssueItem key={issue.id} issue={issue} />;
-            }
+                )}
+              </li>
+            );
           })}
-          <div ref={targetRef}></div>
           {loading && <Loading />}
         </IssueListWrapper>
       ) : (

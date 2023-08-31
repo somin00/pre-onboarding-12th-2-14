@@ -17,13 +17,15 @@ function useFetch({ currentNum }: FetchPropsType) {
 
   const fetchIssues = useCallback(async () => {
     try {
+      setLoading(true);
       const data = await getIssues(currentNum);
-      data.length < 10 ? setLoading(false) : setLoading(true);
       setIssueList(prev => {
         return [...prev, ...data];
       });
     } catch (e) {
       setIsShowError(true);
+    } finally {
+      setLoading(false);
     }
   }, [currentNum]);
 
