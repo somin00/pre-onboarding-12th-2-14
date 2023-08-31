@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import { Link, useLocation } from 'react-router-dom';
 import { styled } from 'styled-components';
@@ -28,7 +28,7 @@ function IssueItem({ issue }: IssueItemPropsType) {
   );
 }
 
-export default IssueItem;
+export default memo(IssueItem);
 
 const IssueItemWrapper = styled.li<{ $pathname: string }>`
   border-bottom: 1px solid black;
