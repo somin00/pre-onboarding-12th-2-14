@@ -12,13 +12,13 @@ function IssueItem({ issue }: IssueItemPropsType) {
   const { pathname } = useLocation();
   return (
     <IssueItemWrapper $pathname={pathname}>
-      <Link
-        to={`/detail/${issue.number}`}
-        state={{ number: issue.number }}
-        className={pathname === '/' ? 'abbreviation' : ''}
-      >
-        &#35;{`${issue.number} ${issue.title}`}
-      </Link>
+      {pathname === '/' ? (
+        <Link to={`/detail/${issue.number}`} state={{ number: issue.number }}>
+          &#35;{`${issue.number} ${issue.title}`}
+        </Link>
+      ) : (
+        <p> &#35;{`${issue.number} ${issue.title}`}</p>
+      )}
       <div>
         <span>작성자: {`${issue.user.login}`}, </span>
         <span>작성일: {`${changeDateFormat(issue.created_at)}`}</span>
@@ -35,20 +35,25 @@ const IssueItemWrapper = styled.li<{ $pathname: string }>`
   padding-bottom: 10px;
   margin-bottom: 10px;
   position: relative;
+  font-weight: bold;
 
   a {
     display: inline-block;
     margin-bottom: 4px;
-    width: 300px;
-    font-weight: bold;
-  }
-
-  .abbreviation {
     width: 340px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 1.1rem;
+  }
+
+  p {
+    width: 300px;
+    font-size: 1rem;
+  }
+
+  span {
+    font-size: 0.9rem;
   }
 
   .comment {
