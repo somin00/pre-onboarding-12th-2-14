@@ -12,7 +12,11 @@ function IssueItem({ issue }: IssueItemPropsType) {
   const { pathname } = useLocation();
   return (
     <IssueItemWrapper $pathname={pathname}>
-      <Link to={`/detail/${issue.number}`} state={{ number: issue.number }}>
+      <Link
+        to={`/detail/${issue.number}`}
+        state={{ number: issue.number }}
+        className={pathname === '/' ? 'abbreviation' : ''}
+      >
         &#35;{`${issue.number} ${issue.title}`}
       </Link>
       <div>
@@ -31,17 +35,20 @@ const IssueItemWrapper = styled.li<{ $pathname: string }>`
   padding-bottom: 10px;
   margin-bottom: 10px;
   position: relative;
-  font-size: ${({ $pathname }) => ($pathname !== '/' ? '0.9rem' : '1rem')};
 
   a {
     display: inline-block;
     margin-bottom: 4px;
-    width: ${({ $pathname }) => ($pathname !== '/' ? '300px' : '340px')};
+    width: 300px;
+    font-weight: bold;
+  }
+
+  .abbreviation {
+    width: 340px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-weight: bold;
-    font-size: ${({ $pathname }) => ($pathname !== '/' ? '1rem' : '1.1rem')};
+    font-size: 1.1rem;
   }
 
   .comment {
