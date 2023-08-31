@@ -5,7 +5,7 @@ import { styled } from 'styled-components';
 function ErrorPage() {
   return (
     <ErrorWrapper>
-      <p>데이터를 불러오는데 실패했습니다. 새로고침 후 이용해주세요.</p>
+      <p>데이터를 불러오는데 실패했습니다.</p>
     </ErrorWrapper>
   );
 }
