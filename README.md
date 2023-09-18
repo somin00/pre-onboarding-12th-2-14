@@ -11,6 +11,8 @@ npm start
 
 GitHub Rest API를 이용하여 facebook의 react 레포지토리 이슈 목록을 보여줍니다.
 
+![이슈목록](https://github.com/somin00/wanted-pre-onboarding-frontend/assets/61578822/f7d04151-5b26-492f-94e0-d3183f6f6e39)
+
 1. 공통 헤더
 
    Layout 컴포넌트에 Header와 children을 렌더링 하도록 작성했습니다.
